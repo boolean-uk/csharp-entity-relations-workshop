@@ -9,6 +9,7 @@ namespace blogapi.Models
         public string Text { get; set; }
 
         public int PostId { get; set; }
+        [JsonIgnore] // comment this out to get the serialization error
         public Post Post { get; set; }
     }
 }
