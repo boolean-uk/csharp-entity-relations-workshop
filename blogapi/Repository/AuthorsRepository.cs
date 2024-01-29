@@ -18,5 +18,15 @@ namespace blogapi.Repository
         {
             return await _db.Authors.ToListAsync();
         }
+
+        public async Task<Author?> GetAuthor(int authorId)
+        {
+            return await _db.Authors.FindAsync(authorId);
+        }
+
+        public void SaveChanges()
+        {
+            _db.SaveChanges();
+        }
     }
 }

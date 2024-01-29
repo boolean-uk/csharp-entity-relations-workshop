@@ -17,5 +17,16 @@ namespace blogapi.Repository
         {
             return await _db.Posts.ToListAsync();
         }
+
+        public async Task<Post?> GetPost(int postId)
+        {
+            return await _db.Posts.FindAsync(postId);
+        }
+
+        public void SaveChanges()
+        {
+            _db.SaveChanges();
+        }
+
     }
 }
