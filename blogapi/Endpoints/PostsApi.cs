@@ -1,9 +1,13 @@
-﻿using blogapi.Models;
+﻿using blogapi.DTO;
+using blogapi.Models;
 using blogapi.Repository;
 
 namespace blogapi.Endpoints
 {
     public record UpdatePostAuthorRequestDTO(int authorId);
+
+
+
 
     public static class PostsApi
     {
@@ -15,7 +19,8 @@ namespace blogapi.Endpoints
 
         public static async Task<IResult> GetPosts(IPostsRepository postsRepository)
         {
-            return TypedResults.Ok(await postsRepository.GetPostsAsync());
+            var posts = await postsRepository.GetPostsAsync();
+            return TypedResults.Ok(PostResponseDTO.FromRepository(posts));
         }
 
 
@@ -37,7 +42,7 @@ namespace blogapi.Endpoints
 
             postsRepository.SaveChanges();
 
-            return TypedResults.Ok(post);
+            return TypedResults.Ok(new PostResponseDTO(post));
         }
     }
 }

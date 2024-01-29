@@ -8,7 +8,6 @@ namespace blogapi.Models
 
         public string Name { get; set; }
 
-        [JsonIgnore] // comment this out to get the serialization error
         public ICollection<Post> Posts { get; set; } = new List<Post>();
     }
 }
