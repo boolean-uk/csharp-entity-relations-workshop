@@ -16,12 +16,12 @@ namespace blogapi.Repository
 
         public async Task<IEnumerable<Author>> GetAuthorsAsync()
         {
-            return await _db.Authors.ToListAsync();
+            return await _db.Authors.Include(a => a.Posts).ThenInclude(p => p.Comments).ToListAsync();
         }
 
         public async Task<Author?> GetAuthor(int authorId)
         {
-            return await _db.Authors.FindAsync(authorId);
+            return await _db.Authors.Include(a => a.Posts).ThenInclude(p => p.Comments).FirstOrDefaultAsync(a => a.Id == authorId);
         }
 
         public void SaveChanges()

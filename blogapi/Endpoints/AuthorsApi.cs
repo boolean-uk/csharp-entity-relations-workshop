@@ -1,4 +1,5 @@
-﻿using blogapi.Repository;
+﻿using blogapi.DTO;
+using blogapi.Repository;
 
 namespace blogapi.Endpoints
 {
@@ -11,7 +12,7 @@ namespace blogapi.Endpoints
 
         public static async Task<IResult> GetAuthors(IAuthorsRepository authorsRepository)
         {
-            return TypedResults.Ok(await authorsRepository.GetAuthorsAsync());
+            return TypedResults.Ok(AuthorResponseDTO.FromRepository(await authorsRepository.GetAuthorsAsync()));
         }
     }
 }
